@@ -89,13 +89,13 @@ mod test {
         assert!(result.is_ok());
         assert!(super::initialized());
 
-        let r = super::run("add", (3i32, 5i32));
+        let r = super::run(&["add"], (3i32, 5i32));
         assert_eq!(r.unwrap().unwrap().into_integer().unwrap(), 8);
 
-        let r = super::run("echo", ((),));
+        let r = super::run(&["echo"], ((),));
         r.unwrap().unwrap().into_unit().unwrap();
 
-        let r = super::run("inc", (9i32,));
+        let r = super::run(&["inc"], (9i32,));
         assert_eq!(r.unwrap().unwrap().into_integer().unwrap(), 10);
     }
 }
