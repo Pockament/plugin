@@ -1,0 +1,10 @@
+[package]
+name = "plugin"
+version = "0.1.0-alpha.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.15.0", features = ["full"] }
+rune = "0.10.3"
+warp = "0.3.2"
+lazy_static = "1.4.0"
