@@ -41,14 +41,14 @@ pub fn uninit() {
 }
 
 #[allow(clippy::result_unit_err)]
-pub fn run<A: GuardedArgs>(name: &str, args: A) -> Result<Result<Value, String>, ()> {
+pub fn run<A: GuardedArgs>(name: &[&str], args: A) -> Result<Result<Value, String>, ()> {
     if unsafe { RUNE.is_none() } {
         return Err(());
     }
 
     let result = unsafe { RUNE.as_mut() }
         .unwrap()
-        .call(&[name], args)
+        .call(name, args)
         .map_err(|e| e.to_string());
 
     Ok(result)
