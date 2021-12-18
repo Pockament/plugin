@@ -5,6 +5,7 @@ pub use rune::Value;
 use rune::{Context, Source, Sources, Vm};
 
 mod http_server;
+mod http_client;
 
 static mut RUNE: Option<Box<Vm>> = None;
 
@@ -13,6 +14,7 @@ pub fn initialized() -> bool { unsafe { RUNE.is_some() } }
 pub fn init(src_codes: &[(&str, &str)]) -> Result<(), String> {
     let mut ctx = Context::new();
     ctx.install(&http_server::module()).unwrap();
+    ctx.install(&http_client::module()).unwrap();
     let ctx_arc = Arc::new(ctx.runtime());
 
     let mut srcs = Sources::new();
