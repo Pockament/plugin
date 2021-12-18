@@ -4,13 +4,16 @@ use rune::runtime::GuardedArgs;
 pub use rune::Value;
 use rune::{Context, Source, Sources, Vm};
 
+mod http_server;
+
 static mut RUNE: Option<Box<Vm>> = None;
 
 pub fn initialized() -> bool { unsafe { RUNE.is_some() } }
 
 pub fn init(src_codes: &[(&str, &str)]) -> Result<(), String> {
-    let ctx = Context::new().runtime();
-    let ctx_arc = Arc::new(ctx);
+    let mut ctx = Context::new();
+    ctx.install(&http_server::make_module()).unwrap();
+    let ctx_arc = Arc::new(ctx.runtime());
 
     let mut srcs = Sources::new();
     src_codes
