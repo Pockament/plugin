@@ -39,7 +39,7 @@ pub fn init(src_codes: &[(&str, &str)]) -> Result<(), String> {
 
 pub fn uninit() {
     unsafe {
-        RUNE = None;
+        RUNE.take();
     }
 }
 
