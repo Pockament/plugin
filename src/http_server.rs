@@ -9,16 +9,15 @@ use rune::runtime::SyncFunction;
 use rune::{Module, Value};
 use tokio::task::JoinHandle;
 
-    let mut m = Module::new();
-
-    m.async_function(&["https", "up"], up).unwrap();
-    m.function(&["https", "down"], down).unwrap();
-    m.function(&["https", "register"], register).unwrap();
-    m.function(&["https", "unregister"], unregister).unwrap();
-    m.function(&["https", "is_up"], is_up).unwrap();
-    m.function(&["https", "is_registered"], is_registered)
-        .unwrap();
 pub fn module() -> Module {
+    let mut m = Module::with_crate("https");
+
+    m.async_function(&["up"], up).unwrap();
+    m.function(&["down"], down).unwrap();
+    m.function(&["register"], register).unwrap();
+    m.function(&["unregister"], unregister).unwrap();
+    m.function(&["is_up"], is_up).unwrap();
+    m.function(&["is_registered"], is_registered).unwrap();
 
     m
 }
