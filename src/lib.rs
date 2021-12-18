@@ -12,7 +12,7 @@ pub fn initialized() -> bool { unsafe { RUNE.is_some() } }
 
 pub fn init(src_codes: &[(&str, &str)]) -> Result<(), String> {
     let mut ctx = Context::new();
-    ctx.install(&http_server::make_module()).unwrap();
+    ctx.install(&http_server::module()).unwrap();
     let ctx_arc = Arc::new(ctx.runtime());
 
     let mut srcs = Sources::new();
